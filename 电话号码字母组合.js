@@ -25,19 +25,27 @@ var letterCombinations = (digits) => {
         7: "pqrs",
         8: "tuv",
         9: "wxyz",
-    };
-    const res = []
-    const recursiveCall = (newDigit, i) => {
+    }
+
+    // 新起一个空数组放结果
+    let res = []
+
+    // 递归方程-与以往不同，此为从前向后递归
+    const recursive = (newDigit, i) => {
+        // 递归终止条件，递归次数i大于数字个数时
         if (i > digits.length - 1) {
+            // 向数组中push这个结果，然后结束
             res.push(newDigit)
             return
         }
+        // 递归开始，先拿到按钮对应的字母串
         const letters = map[digits[i]]
-        for (const l of letters) {
-            recursiveCall( newDigit+l , i+1)
+        // 根据字母串上的字母，逐个向结果中增加各个字母，并记录递归次数；类似树结构，树的子节点为父节点的 map[Digit[i]].length 倍
+        for (let l of letters) {
+            recursive(newDigit+l, i+1)
         }
     }
-    recursiveCall('',0)
+    recursive('',0)
     return res
 }
 
