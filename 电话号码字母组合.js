@@ -37,7 +37,10 @@ var letterCombinations = (digits) => {
             recursiveCall( newDigit+l , i+1)
         }
     }
+    recursiveCall('',0)
+    return res
 }
 
 
-
+var test = "2345"
+console.log(letterCombinations((test)))
